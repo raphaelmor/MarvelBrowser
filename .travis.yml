@@ -6,3 +6,5 @@ script:
   - xctool test -workspace MarvelBrowser.xcworkspace -scheme MarvelBrowser -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 before_install:
   - gem install cocoapods -v '0.33.1'
+  - brew update
+  - brew upgrade xctool
