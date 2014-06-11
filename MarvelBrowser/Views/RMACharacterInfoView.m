@@ -5,7 +5,6 @@
 // Created by Raphael MOR on 22/05/2014.
 // Copyright (c) 2014 Raphael MOR. All rights reserved.
 //
-@import CoreMotion;
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <pop/POP.h>
