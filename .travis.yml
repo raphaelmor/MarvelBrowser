@@ -1,4 +1,8 @@
 language: objective-c
+before_script:
+  - export LANG=en_US.UTF-8
 script:
   - xctool -workspace MarvelBrowser.xcworkspace -scheme MarvelBrowser -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - xctool test -workspace MarvelBrowser.xcworkspace -scheme MarvelBrowser -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+before_install:
+  - gem install cocoapods -v '0.32.1'
