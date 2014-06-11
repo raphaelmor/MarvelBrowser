@@ -1,0 +1,30 @@
+PODS:
+  - Marvelous (0.7.3)
+  - OCMock (2.2.4)
+  - pop (1.0.5)
+  - ReactiveCocoa (2.3.1):
+    - ReactiveCocoa/UI
+  - ReactiveCocoa/Core (2.3.1):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1)
+  - ReactiveCocoa/UI (2.3.1):
+    - ReactiveCocoa/Core
+  - SDWebImage (3.6):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.6)
+
+DEPENDENCIES:
+  - Marvelous (~> 0.7)
+  - OCMock (~> 2.2)
+  - pop (~> 1.0)
+  - ReactiveCocoa (~> 2.3)
+  - SDWebImage (~> 3.6)
+
+SPEC CHECKSUMS:
+  Marvelous: 411f3b47cd07bfada7987b32b1df406fbca7444f
+  OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
+  pop: 75fa2b33934200a8a68abb449ac1726fcf7e43b9
+  ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+
+COCOAPODS: 0.33.1

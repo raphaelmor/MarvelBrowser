@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C5149391-4DB0-4CB4-B14A-A9ACB52B039A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MarvelBrowser</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FEBD76D2-FB26-4824-B926-2F02795A650F</key>
+		<string>https://github.com/raphaelmor/MarvelBrowser.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MarvelBrowser.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FEBD76D2-FB26-4824-B926-2F02795A650F</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/raphaelmor/MarvelBrowser.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FEBD76D2-FB26-4824-B926-2F02795A650F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FEBD76D2-FB26-4824-B926-2F02795A650F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MarvelBrowser</string>
+		</dict>
+	</array>
+</dict>
+</plist>
