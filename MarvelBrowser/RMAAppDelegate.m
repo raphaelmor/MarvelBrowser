@@ -20,7 +20,7 @@
 
     [RCMarvelAPI api].publicKey  = [plistDict objectForKey:@"marvel-public-key"];
     [RCMarvelAPI api].privateKey = [plistDict objectForKey:@"marvel-private-key"];
-
+    
     return YES;
 }
 

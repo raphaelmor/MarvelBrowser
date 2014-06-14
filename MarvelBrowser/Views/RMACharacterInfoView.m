@@ -19,6 +19,10 @@
 @property (nonatomic) RMAAutoPanningImageView *avatarView;
 @property (nonatomic) UILabel *characterName;
 @property (nonatomic) UILabel *characterBio;
+@property (nonatomic) CGFloat yTranslation;
+
+@property (nonatomic) CGFloat minYAllowed;
+@property (nonatomic) CGFloat maxYAllowed;
 
 
 @end
@@ -66,6 +70,16 @@
     [self setupCharacterName];
     [self setupCharacterBio];
     [self setupConstraints];
+    [self setYTranslation:1.f];
+    
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self addGestureRecognizer:panGestureRecognizer];
+    
+    _minYAllowed = -self.frame.size.height / 3.f;
+    //yTranslation = 1.0
+    _maxYAllowed = self.frame.size.height / 2.0f;
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.layer.shadowOpacity = .4f;
 }
 
 - (void)setupCharacterAvatar
@@ -152,6 +166,102 @@
                                                 metrics:nil
                                                   views:viewsDictionary];
     [self addConstraints:constraints];
+}
+
+- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint translation = [recognizer translationInView:self];
+    
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            [self pop_removeAnimationForKey:@"decelerate"];
+        }
+            
+        case UIGestureRecognizerStateChanged:
+        {
+            CGFloat adjustedYTranslation = translation.y / 473.33333f;
+            [self setYTranslation:self.yTranslation + adjustedYTranslation];
+            
+            [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            POPAnimatableProperty *yTranslationProperty = [POPAnimatableProperty propertyWithName:@"yTranslation" initializer:^(POPMutableAnimatableProperty *prop) {
+                prop.readBlock = ^(id obj, CGFloat values[]) {
+                    values[0] = [obj yTranslation];
+                };
+                prop.writeBlock = ^(id obj, const CGFloat values[]) {
+                    [obj setYTranslation:values[0]];
+                };
+                prop.threshold = 0.01;
+            }];
+
+            
+            CGPoint velocity = [recognizer velocityInView:self];
+            velocity.x = 0;
+            velocity.y = -velocity.y/473.33333f;
+            
+
+            
+            POPSpringAnimation *springAnimation = [POPSpringAnimation animation];
+            springAnimation.property = yTranslationProperty;
+            springAnimation.velocity = @(velocity.y);
+            springAnimation.springBounciness =10;
+
+            
+            if (velocity.y > 0) {
+                springAnimation.toValue = @(0.0f);
+            }else {
+                springAnimation.toValue = @(1.0f);
+            }
+            
+            [self pop_addAnimation:springAnimation forKey:@"decelerate"];
+
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+
+- (void)setYTranslation:(CGFloat)yTranslation {
+    NSLog(@"y translation : %.2f", yTranslation);
+    _yTranslation = yTranslation;
+    
+    CGFloat projectedY = _minYAllowed + yTranslation * (_maxYAllowed - _minYAllowed);
+    
+    
+    CGFloat invertedRatio = 1.f - yTranslation;
+    
+    self.center = CGPointMake(self.center.x,projectedY);
+    
+    self.layer.shadowOffset = CGSizeMake(0.f, 10.f * invertedRatio);
+
+    
+    _characterBio.alpha = yTranslation;
+    
+    CGFloat minNameYAllowed = 530;
+    CGFloat maxNameYAllowed = 50;
+    if (yTranslation > 1.0f) {
+        yTranslation = 1.0f;
+    }
+    if (yTranslation < 0.0f) {
+        yTranslation = 0.0f;
+    }
+    invertedRatio = 1.f - yTranslation;
+    
+    CGFloat projectedNameY = minNameYAllowed + yTranslation * (maxNameYAllowed - minNameYAllowed);
+    
+    _characterName.center = CGPointMake(_characterName.center.x,
+                                            projectedNameY);
+    _characterName.alpha =  (sin((invertedRatio*2*M_PI)+M_PI_2) +1.f)/2.f;
+    
 }
 
 @end

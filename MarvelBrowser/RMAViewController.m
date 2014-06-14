@@ -26,9 +26,13 @@
 {
     [super viewDidLoad];
 
-    NSNumber *identifier = @1009368;
+    NSNumber *identifier = @1009718;
     
     [self.characterInfoController fetchCharacterInfo:identifier];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end
