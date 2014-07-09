@@ -5,6 +5,7 @@
 // Created by Raphael MOR on 22/05/2014.
 // Copyright (c) 2014 Raphael MOR. All rights reserved.
 //
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "RMACharacterInfoViewModel.h"
 
@@ -34,6 +35,10 @@
     self.name      = @"";
     self.biography = @"";
     [self setDefaultAvatar];
+
+    self.nameDidChangeSignal      = RACObserve(self, name);
+    self.biographyDidChangeSignal = RACObserve(self, biography);
+    self.avatarDidChangeSignal    = RACObserve(self, avatar);
 }
 
 @end

@@ -53,9 +53,9 @@
 {
     _viewModel = viewModel;
 
-    RAC(self.characterName, text) = RACObserve(viewModel, name);
-    RAC(self.characterBio, text)  = RACObserve(viewModel, biography);
-    RAC(self.avatarView, image)   = RACObserve(viewModel, avatar);
+    RAC(self.characterName, text) = viewModel.nameDidChangeSignal;
+    RAC(self.characterBio, text)  = viewModel.biographyDidChangeSignal;
+    RAC(self.avatarView, image)   = viewModel.avatarDidChangeSignal;
 }
 
 #pragma mark - Private methods

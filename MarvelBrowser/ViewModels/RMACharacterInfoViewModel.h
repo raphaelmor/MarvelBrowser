@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class RACSignal;
+
 @interface RMACharacterInfoViewModel : NSObject
 
-@property (nonatomic) UIImage  *avatar;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *biography;
+@property (nonatomic) UIImage  *avatar;
+
+@property (nonatomic) RACSignal *nameDidChangeSignal;
+@property (nonatomic) RACSignal *biographyDidChangeSignal;
+@property (nonatomic) RACSignal *avatarDidChangeSignal;
 
 - (void)setDefaultAvatar;
 
