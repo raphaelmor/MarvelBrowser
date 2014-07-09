@@ -28,29 +28,29 @@
 {
     [[RCMarvelAPI api] characterByIdentifier:characterID
                             andCallbackBlock:^(id result, RCQueryInfoObject *info, NSError *error) {
-         if (result) {
-             self.character = (RCCharacterObject *)result;
+        if (result) {
+            self.character = (RCCharacterObject *)result;
 
-             dispatch_async(dispatch_get_main_queue(), ^{
-                                self.characterViewModel.name = [self.character.name uppercaseString];
-                                self.characterViewModel.biography = self.character.bio;
-                            });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.characterViewModel.name = [self.character.name uppercaseString];
+                self.characterViewModel.biography = self.character.bio;
+            });
 
-             NSURL *imageURL = self.character.thumbnail.fullSizeURL;
+            NSURL *imageURL = self.character.thumbnail.fullSizeURL;
 
-             [SDWebImageDownloader.sharedDownloader downloadImageWithURL:imageURL
-                                                                 options:0
-                                                                progress:nil
-                                                               completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
-              {
-                  if (image && finished) {
-                      dispatch_async(dispatch_get_main_queue(), ^{
-                                         self.characterViewModel.avatar = image;
-                                     });
-                  }
-              }];
-         }
-     }];
+            [SDWebImageDownloader.sharedDownloader downloadImageWithURL:imageURL
+                                                                options:0
+                                                               progress:nil
+                                                              completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
+            {
+                if (image && finished) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.characterViewModel.avatar = image;
+                    });
+                }
+            }];
+        }
+    }];
 }
 
 @end
