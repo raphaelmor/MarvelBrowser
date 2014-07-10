@@ -14,5 +14,7 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *biography;
 
+- (void)setDefaultAvatar;
+
 
 @end

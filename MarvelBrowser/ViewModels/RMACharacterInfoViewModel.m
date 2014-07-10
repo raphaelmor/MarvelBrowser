@@ -22,13 +22,18 @@
     return self;
 }
 
+- (void)setDefaultAvatar
+{
+    self.avatar = [UIImage imageNamed:@"defaultAvatar"];
+}
+
 #pragma mark - Private Methods
 
 - (void)commonInit
 {
     self.name      = @"";
     self.biography = @"";
-    self.avatar    = [UIImage imageNamed:@"defaultAvatar"];
+    [self setDefaultAvatar];
 }
 
 @end
