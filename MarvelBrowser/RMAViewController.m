@@ -13,6 +13,10 @@
 #import "RMACharacterInfoViewModel.h"
 #import "RMAViewController.h"
 
+#define IRON_MAN @1009368
+#define WOLVERINE @1009718
+#define SPIDER_MAN @1009610
+
 @interface RMAViewController ()
 
 @property (nonatomic) IBOutlet RMACharacterInfoView *characterInfoView;
@@ -26,9 +30,11 @@
 {
     [super viewDidLoad];
 
-    NSNumber *identifier = @1009368;
-    
-    [self.characterInfoController fetchCharacterInfo:identifier];
+    [self.characterInfoController fetchCharacterInfo:IRON_MAN];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.characterInfoController fetchCharacterInfo:SPIDER_MAN];
+    });
 }
 
 @end
