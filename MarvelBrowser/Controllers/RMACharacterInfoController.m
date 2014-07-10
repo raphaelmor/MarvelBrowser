@@ -61,12 +61,9 @@
         self.characterViewModel.biography = character.bio;
         self.characterViewModel.name = [character.name uppercaseString];
 
-        @weakify(self);
         [[[self fetchAvatarForURL:character.thumbnail.fullSizeURL] deliverOn:RACScheduler.mainThreadScheduler] subscribeNext:^(UIImage *avatar) {
-            @strongify(self);
             self.characterViewModel.avatar = avatar;
         } error:^(NSError *error) {
-            @strongify(self);
             [self.characterViewModel setDefaultAvatar];
         }];
     }];
