@@ -7,6 +7,8 @@
 //
 
 #import <Marvelous/Marvelous.h>
+#import <ReactiveCocoa/RACEXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SDWebImage/SDWebImageDownloader.h>
 
 #import "RMACharacterInfoController.h"
@@ -16,44 +18,93 @@
 @interface RMACharacterInfoController ()
 
 @property (nonatomic) NSNumber *characterID;
-@property (nonatomic) RCCharacterObject *character;
+
+@property (nonatomic) RACSignal *characterIDDidChange;
+@property (nonatomic) RACSignal *didFetchCharacter;
 
 @end
 
 @implementation RMACharacterInfoController
 
+- (instancetype)init
+{
+    self = [super init];
+
+    if (self) {
+        self.characterID = @0;
+        [self setupSignals];
+    }
+    return self;
+}
+
 #pragma mark - Public methods
 
 - (void)fetchCharacterInfo:(NSNumber *)characterID
 {
-    [[RCMarvelAPI api] characterByIdentifier:characterID
-                            andCallbackBlock:^(id result, RCQueryInfoObject *info, NSError *error) {
-        if (result) {
-            self.character = (RCCharacterObject *)result;
+    self.characterID = characterID;
+}
 
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.characterViewModel.name = [self.character.name uppercaseString];
-                self.characterViewModel.biography = self.character.bio;
-            });
+#pragma mark - Private methods
 
-            NSURL *imageURL = self.character.thumbnail.fullSizeURL;
+- (void)setupSignals
+{
+    @weakify(self);
+    self.characterIDDidChange = [RACObserve(self, characterID) skip:1];
 
-            [SDWebImageDownloader.sharedDownloader downloadImageWithURL:imageURL
-                                                                options:0
-                                                               progress:nil
-                                                              completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
-            {
-                if (image && finished) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.characterViewModel.avatar = image;
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.characterViewModel setDefaultAvatar];
-                    });
-                }
-            }];
-        }
+    self.didFetchCharacter    = [self.characterIDDidChange flattenMap:^RACStream *(NSNumber *newCharacterID) {
+        @strongify(self);
+        return [self fetchCharacterInfoForID:newCharacterID];
+    }];
+
+    [[self.didFetchCharacter deliverOn:RACScheduler.mainThreadScheduler] subscribeNext:^(RCCharacterObject *character) {
+        @strongify(self);
+        self.characterViewModel.biography = character.bio;
+        self.characterViewModel.name = [character.name uppercaseString];
+
+        @weakify(self);
+        [[[self fetchAvatarForURL:character.thumbnail.fullSizeURL] deliverOn:RACScheduler.mainThreadScheduler] subscribeNext:^(UIImage *avatar) {
+            @strongify(self);
+            self.characterViewModel.avatar = avatar;
+        } error:^(NSError *error) {
+            @strongify(self);
+            [self.characterViewModel setDefaultAvatar];
+        }];
+    }];
+}
+
+- (RACSignal *)fetchCharacterInfoForID:(NSNumber *)characterID
+{
+    return [RACSignal createSignal:^RACDisposable *(id < RACSubscriber > subscriber) {
+        [[RCMarvelAPI api] characterByIdentifier:characterID
+                                andCallbackBlock:^(id character, RCQueryInfoObject *info, NSError *error) {
+            if (!character) {
+                [subscriber sendError:error];
+            } else {
+                [subscriber sendNext:character];
+            }
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
+- (RACSignal *)fetchAvatarForURL:(NSURL *)avatarURL
+{
+    return [RACSignal createSignal:^RACDisposable *(id < RACSubscriber > subscriber) {
+        NSOperation *operation = [SDWebImageDownloader.sharedDownloader downloadImageWithURL:avatarURL
+                                                                                     options:0
+                                                                                    progress:nil
+                                                                                   completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+            if (image && finished) {
+                [subscriber sendNext:image];
+            } else {
+                [subscriber sendError:error];
+            }
+            [subscriber sendCompleted];
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            [operation cancel];
+        }];;
     }];
 }
 
