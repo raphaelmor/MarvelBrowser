@@ -47,6 +47,10 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.characterViewModel.avatar = image;
                     });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.characterViewModel setDefaultAvatar];
+                    });
                 }
             }];
         }
