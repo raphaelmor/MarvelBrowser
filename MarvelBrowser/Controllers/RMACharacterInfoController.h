@@ -18,9 +18,8 @@
 @interface RMACharacterInfoController : NSObject
 
 /**
- * The view-model created.
+ * The view-model that this controller will update.
  *
- * This view model is created
  */
 @property (nonatomic) IBOutlet RMACharacterInfoViewModel *characterViewModel;
 
@@ -28,7 +27,7 @@
 /**
  *  Fetches character information.
  *
- * @param characterID       The character to fetch
+ * @param characterID       The ID of the character to fetch.
  */
 - (void)fetchCharacterInfo:(NSNumber *)characterID;
 

@@ -33,7 +33,7 @@
     [self.characterInfoController fetchCharacterInfo:IRON_MAN];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.characterInfoController fetchCharacterInfo:SPIDER_MAN];
+        [self.characterInfoController fetchCharacterInfo:WOLVERINE];
     });
 }
 

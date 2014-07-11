@@ -18,7 +18,7 @@
 /**
  * View-model for the view.
  *
- * The view will register using RACObserve to the fields of the view-model, and will be updated
+ * The view will subscribe to the change signals of the view-model, and will be updated
  * automatically when the view-model changes.
  *
  */

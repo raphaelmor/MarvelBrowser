@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2048DF3E196FDFA1001C7AB7 /* RCMarvelAPI+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048DF3D196FDFA1001C7AB7 /* RCMarvelAPI+RAC.m */; };
+		2048DF41196FE128001C7AB7 /* SDWebImageDownloader+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2048DF40196FE128001C7AB7 /* SDWebImageDownloader+RAC.m */; };
 		20959C4A192E26730006E69F /* RMACharacterInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20959C49192E26730006E69F /* RMACharacterInfoViewModel.m */; };
 		20959C4E192E2A610006E69F /* RMACharacterInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20959C4D192E2A610006E69F /* RMACharacterInfoController.m */; };
 		20959C53192E2B030006E69F /* RMACharacterInfoControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20959C52192E2B030006E69F /* RMACharacterInfoControllerTests.m */; };
@@ -43,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2048DF3C196FDFA1001C7AB7 /* RCMarvelAPI+RAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCMarvelAPI+RAC.h"; sourceTree = "<group>"; };
+		2048DF3D196FDFA1001C7AB7 /* RCMarvelAPI+RAC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCMarvelAPI+RAC.m"; sourceTree = "<group>"; };
+		2048DF3F196FE128001C7AB7 /* SDWebImageDownloader+RAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageDownloader+RAC.h"; sourceTree = "<group>"; };
+		2048DF40196FE128001C7AB7 /* SDWebImageDownloader+RAC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageDownloader+RAC.m"; sourceTree = "<group>"; };
 		20959C48192E26730006E69F /* RMACharacterInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMACharacterInfoViewModel.h; sourceTree = "<group>"; };
 		20959C49192E26730006E69F /* RMACharacterInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMACharacterInfoViewModel.m; sourceTree = "<group>"; };
 		20959C4C192E2A610006E69F /* RMACharacterInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMACharacterInfoController.h; sourceTree = "<group>"; };
@@ -105,6 +111,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2048DF3B196FDF61001C7AB7 /* RACExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				2048DF3C196FDFA1001C7AB7 /* RCMarvelAPI+RAC.h */,
+				2048DF3D196FDFA1001C7AB7 /* RCMarvelAPI+RAC.m */,
+				2048DF3F196FE128001C7AB7 /* SDWebImageDownloader+RAC.h */,
+				2048DF40196FE128001C7AB7 /* SDWebImageDownloader+RAC.m */,
+			);
+			path = RACExtensions;
+			sourceTree = "<group>";
+		};
 		20959C44192E26220006E69F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +196,7 @@
 		20A802A7192E167000A0F2A3 /* MarvelBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				2048DF3B196FDF61001C7AB7 /* RACExtensions */,
 				20959C54192E34C70006E69F /* Views */,
 				20959C4B192E28E90006E69F /* Controllers */,
 				20959C44192E26220006E69F /* ViewModels */,
@@ -402,7 +420,9 @@
 				20A802AE192E167000A0F2A3 /* main.m in Sources */,
 				20959C57192E35100006E69F /* RMACharacterInfoView.m in Sources */,
 				20959C4E192E2A610006E69F /* RMACharacterInfoController.m in Sources */,
+				2048DF3E196FDFA1001C7AB7 /* RCMarvelAPI+RAC.m in Sources */,
 				20959C5A192F9F130006E69F /* RMAAutoPanningImageView.m in Sources */,
+				2048DF41196FE128001C7AB7 /* SDWebImageDownloader+RAC.m in Sources */,
 				20A802B2192E167000A0F2A3 /* RMAAppDelegate.m in Sources */,
 				20A802B8192E167000A0F2A3 /* RMAViewController.m in Sources */,
 				20959C4A192E26730006E69F /* RMACharacterInfoViewModel.m in Sources */,

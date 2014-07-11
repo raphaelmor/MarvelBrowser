@@ -23,6 +23,8 @@
     return self;
 }
 
+#pragma mark - Public Methods
+
 - (void)setDefaultAvatar
 {
     self.avatar = [UIImage imageNamed:@"defaultAvatar"];

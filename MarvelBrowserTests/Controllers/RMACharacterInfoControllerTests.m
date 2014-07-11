@@ -6,11 +6,12 @@
 // Copyright (c) 2014 Raphael MOR. All rights reserved.
 //
 
-#import <Marvelous/Marvelous.h>
 #import <OCMock/OCMock.h>
 #import <XCTest/XCTest.h>
 
 #import "RMACharacterInfoController.h"
+
+#import "RCMarvelAPI+RAC.h"
 #import "RMACharacterInfoViewModel.h"
 
 @interface RMACharacterInfoControllerTests : XCTestCase
@@ -37,7 +38,7 @@
 
     id mockMarvelAPI      = [OCMockObject mockForClass:[RCMarvelAPI class]];
     [[[mockMarvelAPI stub] andReturn:mockMarvelAPI] api];
-    [[mockMarvelAPI expect] characterByIdentifier:characterID andCallbackBlock:OCMOCK_ANY];
+    [[mockMarvelAPI expect] fetchCharacterInfoForID:characterID];
 
     RMACharacterInfoController *controller = [[RMACharacterInfoController alloc]
                                               init];
